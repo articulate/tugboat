@@ -1,0 +1,26 @@
+consul:
+  image: gliderlabs/consul-server
+  ports:
+    - 8500
+  command: "-bootstrap -bind 0.0.0.0 -client 0.0.0.0 -ui"
+  labels:
+    - "SERVICE_8500_NAME=consul"
+    - "SERVICE_8500_TAGS=load-balance"
+
+registrator:
+  image: gliderlabs/registrator:latest
+  command: -ip 192.168.99.100 consul://consul:8500
+  volumes:
+    - "/var/run/docker.sock:/tmp/docker.sock"
+  links:
+    - consul
+  restart: always
+
+lb:
+  build: .
+  links:
+    - consul
+  ports:
+    - "80:80"
+    - "443:443"
+  restart: always

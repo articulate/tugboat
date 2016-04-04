@@ -1,0 +1,14 @@
+<html>
+  <head>
+    <title>Container Not Running</title>
+  </head>
+  <body>
+    <h1>Container Not Running</h1>
+    <p>If you do not see your container below, first make sure you have started it with "docker-compose up".  If it is definitely running, then please run "make start" in the "tugboat" repo again.</p>
+    <ul>
+{{ range services }}{{ range service .Name }}{{ if in .Tags "load-balance" }}
+<li><a href="http://{{ .Name }}.{{ env "LB_DOMAIN" }}/">{{ .Name }}.{{ env "LB_DOMAIN" }}</a> proxied to {{ .Address }}:{{ .Port }}</li>
+{{ end }}{{ end }}{{ end }}
+    </ul>
+  </body>
+</html>
