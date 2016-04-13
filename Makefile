@@ -11,6 +11,7 @@ else ifeq ($(shell docker-machine ip ${DOCKER_MACHINE_NAME}),192.168.99.100)
 else
 	@echo "---- YOUR DOCKER IP IS WRONG ----"
 	@echo "Your docker IP should be 192.168.99.100, but it is $(shell docker-machine ip ${DOCKER_MACHINE_NAME})"
+	@echo "See: https://github.com/articulate/tugboat/blob/master/README.md#tugboat-says-my-ip-doesnt-match-19216899100"
 	@echo "---------------------------------"
 endif
 
