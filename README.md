@@ -74,6 +74,13 @@ If you know of a good way to adapt this tool to work with linux, feel free to su
 
 - If you are using a router that has "rebind production" turned on, you will need to turn that off, or add an exception for this domain.  DD-WRT and Open-WRT often enable it by default.
 
+### Tugboat says my IP doesn't match 192.168.99.100
+
+Tugboat relies on the fact that your VM is running on the default IP. Some situations can arise that cause it to use a different IP. There are two ways to fix this:
+
+1. Reboot your machine (not the VM).
+2. Run `docker-machine stop default`, ensure all virtualbox VMs are stopped, all virtualbox processes are stopped (including the GUI), and then run run `docker-machine start default`.  If this doesn't work, see (1).
+
 ## Contributing
 
 1. Fork it ( https://github.com/articulate/tugboat/fork )
