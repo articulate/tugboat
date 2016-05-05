@@ -1,5 +1,5 @@
 start:
-ifndef $(shell pinata --version 2> /dev/null)
+ifneq (, $(shell which pinata))
 	@echo "---- YOU MAY BE RUNNING BETA DOCKER ----"
 	@echo 'Your results may vary.'
 	@echo "-------------------------------------"
