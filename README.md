@@ -81,6 +81,12 @@ Tugboat relies on the fact that your VM is running on the default IP. Some situa
 1. Reboot your machine (not the VM).
 2. Run `docker-machine stop default`, ensure all virtualbox VMs are stopped, all virtualbox processes are stopped (including the GUI), and then run run `docker-machine start default`.  If this doesn't work, see (1).
 
+## Notes on Docker Beta for Mac/Windows
+
+Docker beta uses the IP 127.0.0.1 instead of 192.168.99.100.  So you will need to use the hostnames `beta.tugboat.tld` which maps to 127.0.0.1.
+
+See section `Custom Configuration` above.
+
 ## Contributing
 
 1. Fork it ( https://github.com/articulate/tugboat/fork )

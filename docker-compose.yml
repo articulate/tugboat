@@ -6,10 +6,11 @@ consul:
   labels:
     - "SERVICE_8500_NAME=consul"
     - "SERVICE_8500_TAGS=load-balance"
+  restart: always
 
 registrator:
   image: gliderlabs/registrator:latest
-  command: -ip 192.168.99.100 consul://consul:8500
+  command: -internal consul://consul:8500
   volumes:
     - "/var/run/docker.sock:/tmp/docker.sock"
   links:
