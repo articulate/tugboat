@@ -16,6 +16,8 @@ services:
     volumes:
       - "/var/run/docker.sock:/tmp/docker.sock"
     restart: always
+    depends_on:
+      - consul
 
   lb:
     build: .
@@ -23,3 +25,5 @@ services:
       - "80:80"
       - "443:443"
     restart: always
+    depends_on:
+      - consul
