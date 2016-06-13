@@ -1,6 +1,8 @@
-lb:
-  environment:
-    - "LB_SSL=true"
-    - "LB_DOMAIN=tugboat.zone"
-    - "LB_SSL_KEY_FILE=tugboat.zone-self.key"
-    - "LB_SSL_CRT_FILE=tugboat.zone-self.crt"
+version: '2'
+services:
+  lb:
+    environment:
+      - "LB_SSL=true"
+      - "LB_DOMAIN=tugboat.zone"
+      - "LB_SSL_KEY_FILE=tugboat.zone-self.key"
+      - "LB_SSL_CRT_FILE=tugboat.zone-self.crt"
