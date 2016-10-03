@@ -70,9 +70,12 @@ If you know of a good way to adapt this tool to work with linux, feel free to su
 
 ## Troubleshooting
 
-### None of the tugboat domains are resolving!
+### None of the tugboat domains are resolving
 
-- If you are using a router that has "rebind production" turned on, you will need to turn that off, or add an exception for this domain.  DD-WRT and Open-WRT often enable it by default.
+There are two causes of this:
+
+1. You are using a router that has "rebind production" turned on, you will need to turn that off, or add an exception for this domain.  DD-WRT and Open-WRT often enable it by default.
+2. Your DNS server doesn't allow hostnames to resolve to local IPs (eg: 192.168.x.x).  You can try using Google's DNS servers (8.8.8.8 and 8.8.4.4).
 
 ### Tugboat says my IP doesn't match 192.168.99.100
 
