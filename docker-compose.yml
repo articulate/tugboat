@@ -7,8 +7,10 @@ services:
     command: "-bootstrap -bind 0.0.0.0 -client 0.0.0.0 -ui"
     dns_search: ""
     labels:
+      - "SERVICE_8500_CHECK_TCP=true"
+      - "SERVICE_8500_CHECK_INTERVAL=15s"
       - "SERVICE_8500_NAME=consul"
-      - "SERVICE_8500_TAGS=load-balance"
+      - "SERVICE_8500_TAGS=urlprefix-consul.docker.articulate.zone/"
     restart: always
 
   registrator:
@@ -21,12 +23,14 @@ services:
     depends_on:
       - consul
 
-  lb:
-    build: .
+  fabio:
+    image: magiconair/fabio
     dns_search: ""
+    environment:
+      - "REGISTRY_CONSUL_ADDR=consul:8500"
+      - "REGISTRY_CONSUL_REGISTER_TAGS=urlprefix-fabio.docker.articulate.zone/,urlprefix-skipper.docker.articulate.zone/"
     ports:
-      - "80:80"
-      - "443:443"
+      - "80:9999"
     restart: always
     depends_on:
       - consul
