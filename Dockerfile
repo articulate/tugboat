@@ -18,6 +18,7 @@ RUN cd /tmp && \
 
 ADD services/nginx.service /etc/service/nginx/run
 ADD services/consul-template.service /etc/service/consul-template/run
+RUN chmod -R +x /etc/service
 
 RUN rm -v /etc/nginx/conf.d/*
 ADD nginx/templates/* /etc/consul-templates/
