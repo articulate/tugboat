@@ -1,6 +1,4 @@
-docker-machine env > docker-init.cmd
-cmd.exe /c docker-init.cmd
-del docker-init.cmd
+FOR /f "tokens=*" %%i IN ('docker-machine env') DO @%%i
 docker-compose stop
 docker-compose rm -f
 docker-compose build
