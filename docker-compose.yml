@@ -1,4 +1,4 @@
-version: '2'
+version: '2.1'
 services:
   consul:
     image: gliderlabs/consul-server
@@ -15,7 +15,7 @@ services:
 
   registrator:
     image: gliderlabs/registrator:latest
-    command: -ip 192.168.99.100 consul://consul:8500
+    command: "-ip ${TUGBOAT_IP:-192.168.99.100} consul://consul:8500"
     dns_search: ""
     volumes:
       - "/var/run/docker.sock:/tmp/docker.sock"
