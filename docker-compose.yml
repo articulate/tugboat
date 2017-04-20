@@ -28,7 +28,7 @@ services:
     dns_search: ""
     volumes:
       - "./ssl:/ssl"
-    labels:
+    environment:
       - "FABIO_PROXY_CS=cs=ssl;type=file;cert=/ssl/tugboat.zone-self.crt;key=/ssl/tugboat.zone-self.key"
       - "FABIO_PROXY_ADDR=:80,:443;cs=ssl"
       - "FABIO_UI_TITLE=Tugboat Services"
