@@ -24,7 +24,13 @@ ports:
   - 3000 #ensure this is the correct port your service exposes
 labels:
   - "SERVICE_3000_NAME=awesome-service" #adjust the port number here too, if needed
-  - "SERVICE_3000_TAGS=load-balance"
+  - "SERVICE_3000_TAGS=urlprefix-awesome-service.*/"
+```
+
+Alternatively, you can make it only work on a single host, notwildcarded.
+
+```
+  - "SERVICE_3000_TAGS=urlprefix-awesome-service.tugboat.ninja/"
 ```
 
 **Note:** the `ports` line should NOT look like `3000:3000`. It should be a single port number only.  This allows docker to assign a RANDOM port to bind to on the host.  Consul / Registrator / NGINX will handle this random port without issue. This prevents you from experiencing port conflicts!
@@ -35,7 +41,7 @@ Then simply go to `http://awesome-service.tugboat.zone/` in your browser (becaus
 
 ## SSL Support
 
-This project DOES provide SSL support (but needs to be enabled, see below).  By default, it uses a self-signed certificate.  You will receive a warning when you try to load `https://container.tugboat.zone`, you can simply bypass the warning and continue.
+This project by default provides SSL support using a self-signed SSL cert for `*.tugboat.zone`
 
 The self-signed certificate likely will not work well for internal app-to-app communication since it will likely reject the cert.  We personally just use http for that (it's internal anyways!), but you also have the option to use your own SSL certificate.
 
@@ -45,8 +51,7 @@ To use a custom configuration (enable SSL, custom SSL cert, custom domain) pleas
 
 `cp docker-compose.override.example.yml docker-compose.override.yml` and then edit to your needs.
 
-**Note:** If you use a custom domain, you need to also setup wildcard
-DNS to the IP `192.168.99.100`. So if you use the domain `tugboat.ninja`, you need to setup `*.tugboat.ninja` to point to `192.168.99.100`.
+**Note:** If you use a custom domain, you need to also setup wildcard DNS to the IP `192.168.99.100`. So if you use the domain `tugboat.ninja`, you need to setup `*.tugboat.ninja` to point to `192.168.99.100`.
 
 We own and have wildcard DNS set up for the following domains:
 
@@ -56,7 +61,7 @@ We own and have wildcard DNS set up for the following domains:
 
 ## Static Custom Configuration
 
-Are you a company where you want all of your devs to use the same custom configuration?  Well we are too, so we have you sorted there as well!
+Are you at company where you want all of your devs to use the same custom configuration?  Well we are too, so we have you sorted there as well!
 
 Head on over to [Tugboat Bootstrapper](https://github.com/articulate/tugboat-bootstrapper) to learn how to create a repo with static configs
 
@@ -100,5 +105,4 @@ See section `Custom Configuration` above.
 
 ## Contributors
 
-- [tecnobrat](https://github.com/tecnobrat) Brian Stolz - creator,
-  maintainer
+- [tecnobrat](https://github.com/tecnobrat) Brian Stolz - creator, maintainer
