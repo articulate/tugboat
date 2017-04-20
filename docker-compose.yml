@@ -10,7 +10,7 @@ services:
       - "SERVICE_8500_CHECK_TCP=true"
       - "SERVICE_8500_CHECK_INTERVAL=15s"
       - "SERVICE_8500_NAME=consul"
-      - "SERVICE_8500_TAGS=urlprefix-consul.tugboat.zone/"
+      - "SERVICE_8500_TAGS=urlprefix-consul.*/"
     restart: always
 
   registrator:
@@ -34,7 +34,7 @@ services:
       - "FABIO_UI_TITLE=Tugboat Services"
       - "FABIO_UI_COLOR=blue"
       - "REGISTRY_CONSUL_ADDR=consul:8500"
-      - "REGISTRY_CONSUL_REGISTER_TAGS=urlprefix-fabio.tugboat.zone/,urlprefix-/"
+      - "REGISTRY_CONSUL_REGISTER_TAGS=urlprefix-fabio.*/,urlprefix-/"
     ports:
       - "80:80"
       - "443:443"
