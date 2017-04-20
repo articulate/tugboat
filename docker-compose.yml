@@ -26,23 +26,18 @@ services:
   fabio:
     image: magiconair/fabio
     dns_search: ""
+    volumes:
+      - "./ssl:/ssl"
     environment:
+      - "FABIO_PROXY_CS=cs=ssl;type=file;cert=/ssl/tugboat.zone-self.crt;key=/ssl/tugboat.zone-self.key;clientca=p/clientAuth.pem"
+      - "FABIO_PROXY_ADDR=:80,:443;cs=ssl"
+      - "FABIO_UI_TITLE=Tugboat Services"
+      - "FABIO_UI_COLOR=blue"
       - "REGISTRY_CONSUL_ADDR=consul:8500"
-      - "REGISTRY_CONSUL_REGISTER_TAGS=urlprefix-fabio.docker.articulate.zone/,urlprefix-skipper.docker.articulate.zone/"
+      - "REGISTRY_CONSUL_REGISTER_TAGS=urlprefix-fabio.docker.articulate.zone/,urlprefix-skipper.docker.articulate.zone/,urlprefix-/"
     ports:
-      - "80:9999"
-    restart: always
-    depends_on:
-      - consul
-
-  lb:
-    build: .
-    dns_search: ""
-    environment:
-      - "UPSTREAM_IP=192.168.99.100"
-      - "UPSTREAM_PORT=80"
-    ports:
+      - "80:80"
       - "443:443"
     restart: always
     depends_on:
-      - fabio
+      - consul
