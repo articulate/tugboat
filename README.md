@@ -2,7 +2,7 @@
 
 This project contains a NGINX reverse proxy, consul, and registrator.  When used together, they can create dynamic virtual host for any web container you launch.
 
-This project requires that you are using the Docker Toolbox, which uses docker-machine with Virtualbox and Boot2Docker.  It will not work on linux (unless you manually set a host IP of 192.168.99.100).
+This project requires that you are using the Docker for Windows / Mac.  It will not work on linux (unless you manually set an interface alias with the IP 192.168.65.1).
 
 This means every new container (when lightly configured) you launch, will have a custom hostname you can pull up in your browser.
 
@@ -27,17 +27,11 @@ labels:
   - "SERVICE_3000_TAGS=urlprefix-awesome-service.*/"
 ```
 
-Alternatively, you can make it only work on a single host, notwildcarded.
-
-```
-  - "SERVICE_3000_TAGS=urlprefix-awesome-service.tugboat.ninja/"
-```
-
 **Note:** the `ports` line should NOT look like `3000:3000`. It should be a single port number only.  This allows docker to assign a RANDOM port to bind to on the host.  Consul / Registrator / NGINX will handle this random port without issue. This prevents you from experiencing port conflicts!
 
 Now run `docker-compose up` on your project.
 
-Then simply go to `http://awesome-service.tugboat.zone/` in your browser (because we set the name to be `awesome-service`)
+Then simply go to `http://awesome-service.tugboat.zone/` (docker toolbox) or `http://awesome-service.native.tugboat.zone` (docker native) in your browser (because we set the name to be `awesome-service`)
 
 ## SSL Support
 
@@ -51,7 +45,7 @@ To use a custom configuration (enable SSL, custom SSL cert, custom domain) pleas
 
 `cp docker-compose.override.example.yml docker-compose.override.yml` and then edit to your needs.
 
-**Note:** If you use a custom domain, you need to also setup wildcard DNS to the IP `192.168.99.100`. So if you use the domain `tugboat.ninja`, you need to setup `*.tugboat.ninja` to point to `192.168.99.100`.
+**Note:** If you use a custom domain, you need to also setup wildcard DNS to the IP `192.168.65.1`. So if you use the domain `tugboat.ninja`, you need to setup `*.tugboat.ninja` to point to `192.168.65.1`.
 
 We own and have wildcard DNS set up for the following domains:
 
@@ -81,19 +75,6 @@ There are two causes of this:
 
 1. You are using a router that has "rebind production" turned on, you will need to turn that off, or add an exception for this domain.  DD-WRT and Open-WRT often enable it by default.
 2. Your DNS server doesn't allow hostnames to resolve to local IPs (eg: 192.168.x.x).  You can try using Google's DNS servers (8.8.8.8 and 8.8.4.4).
-
-### Tugboat says my IP doesn't match 192.168.99.100
-
-Tugboat relies on the fact that your VM is running on the default IP. Some situations can arise that cause it to use a different IP. There are two ways to fix this:
-
-1. Reboot your machine (not the VM).
-2. Run `docker-machine stop default`, ensure all virtualbox VMs are stopped, all virtualbox processes are stopped (including the GUI), and then run run `docker-machine start default`.  If this doesn't work, see (1).
-
-## Notes on Docker Beta for Mac/Windows
-
-Docker beta uses the IP 127.0.0.1 instead of 192.168.99.100.  So you will need to use the hostnames `beta.tugboat.tld` which maps to 127.0.0.1.
-
-See section `Custom Configuration` above.
 
 ## Contributing
 
