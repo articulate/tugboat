@@ -1,6 +1,6 @@
-# Tugboat, automatic NGINX reverse proxy for containers
+# Tugboat, automatic reverse proxy for containers
 
-This project contains a NGINX reverse proxy, consul, and registrator.  When used together, they can create dynamic virtual host for any web container you launch.
+This project contains a fabio reverse proxy, consul, and registrator.  When used together, they can create dynamic virtual host for any web container you launch.
 
 This project requires that you are using the Docker for Windows / Mac.  It will not work on linux (unless you manually set an interface alias with the IP 192.168.65.1).
 
@@ -27,7 +27,7 @@ labels:
   - "SERVICE_3000_TAGS=urlprefix-awesome-service.*/"
 ```
 
-**Note:** the `ports` line should NOT look like `3000:3000`. It should be a single port number only.  This allows docker to assign a RANDOM port to bind to on the host.  Consul / Registrator / NGINX will handle this random port without issue. This prevents you from experiencing port conflicts!
+**Note:** the `ports` line should NOT look like `3000:3000`. It should be a single port number only.  This allows docker to assign a RANDOM port to bind to on the host.  Consul / Registrator / fabio will handle this random port without issue. This prevents you from experiencing port conflicts!
 
 Now run `docker-compose up` on your project.
 
