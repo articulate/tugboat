@@ -1,5 +1,0 @@
-version: '2.1'
-services:
-  fabio:
-    environment:
-      - "FABIO_PROXY_CS=cs=ssl;type=file;cert=/ssl/tugboat.zone-self.crt;key=/ssl/tugboat.zone-self.key"
