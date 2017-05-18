@@ -1,4 +1,4 @@
-version: '2'
+version: '2.1'
 services:
   consul:
     image: gliderlabs/consul-server
@@ -7,13 +7,15 @@ services:
     command: "-bootstrap -bind 0.0.0.0 -client 0.0.0.0 -ui"
     dns_search: ""
     labels:
+      - "SERVICE_8500_CHECK_TCP=true"
+      - "SERVICE_8500_CHECK_INTERVAL=15s"
       - "SERVICE_8500_NAME=consul"
-      - "SERVICE_8500_TAGS=load-balance"
+      - "SERVICE_8500_TAGS=urlprefix-consul.*/"
     restart: always
 
   registrator:
     image: gliderlabs/registrator:latest
-    command: -ip 192.168.99.100 consul://consul:8500
+    command: "-ip ${TUGBOAT_IP:-192.168.99.100} consul://consul:8500"
     dns_search: ""
     volumes:
       - "/var/run/docker.sock:/tmp/docker.sock"
@@ -21,9 +23,18 @@ services:
     depends_on:
       - consul
 
-  lb:
-    build: .
+  fabio:
+    image: magiconair/fabio
     dns_search: ""
+    volumes:
+      - "./ssl:/ssl"
+    environment:
+      - "FABIO_PROXY_CS=cs=ssl;type=path;cert=/ssl"
+      - "FABIO_PROXY_ADDR=:80,:443;cs=ssl"
+      - "FABIO_UI_TITLE=Tugboat Services"
+      - "FABIO_UI_COLOR=blue"
+      - "REGISTRY_CONSUL_ADDR=consul:8500"
+      - "REGISTRY_CONSUL_REGISTER_TAGS=urlprefix-fabio.*/,urlprefix-/"
     ports:
       - "80:80"
       - "443:443"

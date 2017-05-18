@@ -1,7 +1,0 @@
-#!/bin/sh
-
-exec consul-template \
-     -consul=consul:8500 \
-     -template "/etc/consul-templates/containers.conf:/etc/nginx/conf.d/containers.conf:sv hup nginx" \
-     -template "/etc/consul-templates/default.conf:/etc/nginx/conf.d/000-default.conf:sv hup nginx" \
-     -template "/etc/consul-templates/containers.html:/var/www/default/containers.html"
