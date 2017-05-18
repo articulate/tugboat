@@ -1,7 +1,8 @@
 start:
 	docker-compose stop
 	docker-compose rm -f
-	docker-compose build
+	docker-compose pull
+	docker-compose build --pull
 ifneq (, $(shell docker info | grep "provider=virtualbox"))
 	@echo "---- YOU ARE RUNNING DOCKER TOOLBOX ----"
 	TUGBOAT_IP=192.168.99.100 docker-compose up
