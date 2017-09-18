@@ -2,7 +2,7 @@
 
 This project contains a fabio reverse proxy, consul, and registrator.  When used together, they can create dynamic virtual host for any web container you launch.
 
-This project requires that you are using the Docker for Windows / Mac.  It will not work on linux (unless you manually set an interface alias with the IP 192.168.65.1).
+This project requires that you are using Docker for Windows, Mac, or Linux. At the time of this writing, Docker Toolbox is not available for Linux, but docker-compose is available to download [here](https://docs.docker.com/compose/install/).
 
 This means every new container (when lightly configured) you launch, will have a custom hostname you can pull up in your browser.
 
@@ -64,14 +64,6 @@ We own and have wildcard DNS set up for the following domains:
 Are you at company where you want all of your devs to use the same custom configuration?  Well we are too, so we have you sorted there as well!
 
 Head on over to [Tugboat Bootstrapper](https://github.com/articulate/tugboat-bootstrapper) to learn how to create a repo with static configs
-
-## What if I'm running linux?
-
-Well, we don't officially support linux as our setup makes an assumption you are using the Docker Toolbox.  However you can still get it working.  You either need to create a virtual network interface bound on `192.168.99.100` or edit this project to change it to use your host IP and the using a custom domain which wildcards to your custom IP.  This is out of the scope of this tool, but its still possible.
-
-A virtual network interface is your best option.
-
-If you know of a good way to adapt this tool to work with linux, feel free to submit a pull request.
 
 ## Troubleshooting
 
