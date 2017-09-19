@@ -34,7 +34,7 @@ services:
       - "FABIO_UI_TITLE=Tugboat Services"
       - "FABIO_UI_COLOR=blue"
       - "REGISTRY_CONSUL_ADDR=consul:8500"
-      - "REGISTRY_CONSUL_REGISTER_TAGS=urlprefix-fabio.*/"
+      - "REGISTRY_CONSUL_REGISTER_TAGS=urlprefix-fabio.*/,urlprefix-dev.*/"
     ports:
       - "80:80"
       - "443:443"
