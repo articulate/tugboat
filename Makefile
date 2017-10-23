@@ -3,7 +3,7 @@ UNAME := $(shell uname)
 ifeq ($(UNAME), Linux)
 DEVICE := $(shell netstat -rn -A inet | grep ^0.0.0.0 | tr ' ' '\n' | tail -n1)
 else
-DEVICE := $(shell netstat -rn -f inet | grep ^default | tr ' ' '\n' | tail -n1)
+DEVICE := $(shell netstat -rn -f inet | grep -v "link#" | grep ^default | tr ' ' '\n' | tail -n1)
 endif
 
 start:
