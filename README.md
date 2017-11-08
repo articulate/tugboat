@@ -72,7 +72,7 @@ Head on over to [Tugboat Bootstrapper](https://github.com/articulate/tugboat-boo
 There are two causes of this:
 
 1. You are using a router that has "rebind production" turned on, you will need to turn that off, or add an exception for this domain.  DD-WRT and Open-WRT often enable it by default.
-2. Your DNS server doesn't allow hostnames to resolve to local IPs (eg: 192.168.x.x).  You can try using Google's DNS servers (8.8.8.8 and 8.8.4.4).
+2. Your DNS server doesn't allow hostnames to resolve to local IPs (eg: 192.168.x.x).  You can [try using Google's DNS servers](https://support.apple.com/en-mide/guide/mac-help/enter-dns-and-search-domain-settings-mh14127) (8.8.8.8 and 8.8.4.4).
 
 ## Contributing
 
