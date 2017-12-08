@@ -86,4 +86,4 @@ There are two causes of this:
 
 ## Contributors
 
-- [tecnobrat](https://github.com/tecnobrat) Brian Stolz - creator, maintainer
+- Check out the contributors [here](https://github.com/articulate/tugboat/graphs/contributors)
