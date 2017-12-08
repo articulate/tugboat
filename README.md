@@ -1,5 +1,7 @@
 # Tugboat, automatic reverse proxy for containers
 
+![tugboat logo](/tugboat.png)
+
 This project contains a fabio reverse proxy, consul, and registrator.  When used together, they can create dynamic virtual host for any web container you launch.
 
 This project requires that you are using Docker for Windows, Mac, or Linux. At the time of this writing, Docker Toolbox is not available for Linux, but docker-compose is available to download [here](https://docs.docker.com/compose/install/).
