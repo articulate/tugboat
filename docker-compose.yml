@@ -41,3 +41,16 @@ services:
     restart: always
     depends_on:
       - consul
+
+  consul-template:
+    image: hashicorp/consul-template:alpine
+    command: "-template '/register-hosts.ctmpl:/tmp/register-hosts.sh:/bin/sh /tmp/register-hosts.sh'"
+    volumes:
+      - "./register-hosts.ctmpl:/register-hosts.ctmpl"
+    dns_search: ""
+    environment:
+      CONSUL_HTTP_ADDR: "http://consul:8500"
+    restart: always
+    depends_on:
+      - consul
+

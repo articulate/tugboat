@@ -1,0 +1,12 @@
+#!/bin/bash
+
+curl -X DELETE "${CONSUL_HTTP_ADDR}/v1/kv?recurse=true"
+{{ range services }}
+{{ range service .Name }}
+{{ range $tag := .Tags }}
+{{ if $tag | regexMatch "consul-key:(.*?):(.*?)" }}
+curl -X PUT ${CONSUL_HTTP_ADDR}/v1/kv/{{ $tag | regexReplaceAll "consul-key:(.*?):.*" "$1" }} -d '{{ $tag | regexReplaceAll "consul-key:.*?:(.*)" "$1" }}'
+{{ end }}
+{{ end }}
+{{ end }}
+{{ end }}
