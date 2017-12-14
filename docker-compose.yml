@@ -10,7 +10,7 @@ services:
       SERVICE_8500_CHECK_TCP: "true"
       SERVICE_8500_CHECK_INTERVAL: "15s"
       SERVICE_8500_NAME: "consul"
-      SERVICE_8500_TAGS: "urlprefix-consul.*/"
+      SERVICE_8500_TAGS: "urlprefix-consul-tugboat.*/"
     restart: always
 
   registrator:

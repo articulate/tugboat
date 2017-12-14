@@ -25,8 +25,8 @@ You need to add the following 5 lines to your service you want load balanced to 
 ports:
   - 3000 #ensure this is the correct port your service exposes
 labels:
-  - "SERVICE_3000_NAME=awesome-service" #adjust the port number here too, if needed
-  - "SERVICE_3000_TAGS=urlprefix-awesome-service.*/"
+  SERVICE_3000_NAME: awesome-service #adjust the port number here too, if needed
+  SERVICE_3000_TAGS: urlprefix-awesome-service.*/
 ```
 
 **Note:** the `ports` line should NOT look like `3000:3000`. It should be a single port number only.  This allows docker to assign a RANDOM port to bind to on the host.  Consul / Registrator / fabio will handle this random port without issue. This prevents you from experiencing port conflicts!
@@ -66,6 +66,26 @@ We own and have wildcard DNS set up for the following domains:
 Are you at company where you want all of your devs to use the same custom configuration?  Well we are too, so we have you sorted there as well!
 
 Head on over to [Tugboat Bootstrapper](https://github.com/articulate/tugboat-bootstrapper) to learn how to create a repo with static configs
+
+## Dynamic Consul Key/Value pairs
+
+Tugboat supports dynamically setting consul key/values into its consul when you start a container.
+
+Add this TAG when starting your docker container: `consul-key:[consul path]:[value]`
+
+For example: `consul-key:apps/my-service/env_vars/SOME_ENV_VAR:some-value`
+
+That will set a key in `apps/my-service/env_vars/SOME_ENV_VAR` with the value of `some-value`
+
+A complete labels section in your `docker-compose.yml` would look like:
+
+```
+labels:
+  SERVICE_3000_NAME: awesome-service #adjust the port number here too, if needed
+  SERVICE_3000_TAGS: >
+    urlprefix-awesome-service.*/,
+    consul-key:apps/my-service/env_vars/SOME_ENV_VAR:some-value
+```
 
 ## Troubleshooting
 
