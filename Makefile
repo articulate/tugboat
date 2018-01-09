@@ -6,9 +6,7 @@ else
 DEVICE := $(shell netstat -rn -f inet | grep -v "link\#" | grep ^default | tr ' ' '\n' | tail -n1)
 endif
 
-start:
-	docker-compose stop
-	docker-compose rm -f
+start: stop
 	docker-compose pull
 	docker-compose build --pull
 ifneq (, $(shell docker info | grep "provider=virtualbox"))
@@ -32,8 +30,11 @@ endif
 
 stop:
 	docker-compose stop
+	docker-compose rm -f
 ifeq ($(UNAME), Linux)
-	sudo ifconfig $(DEVICE):tugboat 192.168.65.2 down
+	sudo ifconfig $(DEVICE):tugboat 192.168.65.2 down || true
+	sudo ifconfig $(DEVICE):tugboat 192.168.65.1 down || true
 else
-	sudo ifconfig $(DEVICE) -alias 192.168.65.2
+	sudo ifconfig $(DEVICE) -alias 192.168.65.2 || true
+	sudo ifconfig $(DEVICE) -alias 192.168.65.1 || true
 endif
