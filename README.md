@@ -51,7 +51,7 @@ To use a custom configuration (enable SSL, custom SSL cert, custom domain) pleas
 
 `cp docker-compose.override.example.yml docker-compose.override.yml` and then edit to your needs.
 
-**Note:** If you use a custom domain, you need to also setup wildcard DNS to the IP `192.168.64.1`. So if you use the domain `tugboat.ninja`, you need to setup `*.tugboat.ninja` to point to `192.168.64.1`.
+**Note:** If you use a custom domain, you need to also setup wildcard DNS to the IP `192.168.65.2`. So if you use the domain `tugboat.ninja`, you need to setup `*.tugboat.ninja` to point to `192.168.65.2`.
 
 We own and have wildcard DNS set up for the following domains:
 

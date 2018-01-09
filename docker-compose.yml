@@ -15,7 +15,7 @@ services:
 
   registrator:
     image: gliderlabs/registrator:latest
-    command: "-ip ${TUGBOAT_IP:-192.168.64.1} consul://consul:8500"
+    command: "-ip ${TUGBOAT_IP:-192.168.65.2} consul://consul:8500"
     dns_search: ""
     volumes:
       - "/var/run/docker.sock:/tmp/docker.sock"

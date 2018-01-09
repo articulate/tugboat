@@ -16,24 +16,24 @@ ifneq (, $(shell docker info | grep "provider=virtualbox"))
 	TUGBOAT_IP=192.168.99.100 docker-compose up
 else
 	@echo "---- YOU ARE RUNNING DOCKER FOR MAC/LINUX ----"
-ifneq (, $(shell ifconfig | grep "192.168.64.1"))
+ifneq (, $(shell ifconfig | grep "192.168.65.2"))
 	@echo "---- IP FOUND ----"
 else
 ifeq ($(UNAME), Linux)
 	@echo "---- LINUX, ADDING IP ALIAS ----"
-	sudo ifconfig $(DEVICE):tugboat 192.168.64.1 up
+	sudo ifconfig $(DEVICE):tugboat 192.168.65.2 up
 else
 	@echo "---- MAC, ADDING IP ALIAS ----"
-	sudo ifconfig $(DEVICE) alias 192.168.64.1 255.255.255.0
+	sudo ifconfig $(DEVICE) alias 192.168.65.2 255.255.255.0
 endif
 endif
-	TUGBOAT_IP=192.168.64.1 docker-compose up
+	TUGBOAT_IP=192.168.65.2 docker-compose up
 endif
 
 stop:
 	docker-compose stop
 ifeq ($(UNAME), Linux)
-	sudo ifconfig $(DEVICE):tugboat 192.168.64.1 down
+	sudo ifconfig $(DEVICE):tugboat 192.168.65.2 down
 else
-	sudo ifconfig $(DEVICE) -alias 192.168.64.1
+	sudo ifconfig $(DEVICE) -alias 192.168.65.2
 endif
