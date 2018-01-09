@@ -1,4 +1,4 @@
-set TUGBOAT_IP=192.168.65.1
+set TUGBOAT_IP=192.168.64.1
 
 docker-compose stop
 docker-compose rm -f
