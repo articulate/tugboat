@@ -7,7 +7,7 @@ DEVICE := $(shell netstat -rn -f inet | grep -v "link\#" | grep ^default | tr ' 
 endif
 
 start:
-ifeq (, $(shell ifconfig | grep "192.168.65.2"))
+ifneq (, $(shell ifconfig | grep "192.168.65.1"))
 ifeq ($(UNAME), Linux)
 	@echo "---- LINUX, CLEANING OLD IP ALIAS ----"
 	sudo ifconfig $(DEVICE):tugboat 192.168.65.1 down || true
