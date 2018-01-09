@@ -6,7 +6,18 @@ else
 DEVICE := $(shell netstat -rn -f inet | grep -v "link\#" | grep ^default | tr ' ' '\n' | tail -n1)
 endif
 
-start: stop
+start:
+ifeq (, $(shell ifconfig | grep "192.168.65.2"))
+ifeq ($(UNAME), Linux)
+	@echo "---- LINUX, CLEANING OLD IP ALIAS ----"
+	sudo ifconfig $(DEVICE):tugboat 192.168.65.1 down || true
+else
+	@echo "---- MAC, CLEANING OLD IP ALIAS ----"
+	sudo ifconfig $(DEVICE) -alias 192.168.65.1 || true
+endif
+endif
+	docker-compose stop
+	docker-compose rm -f
 	docker-compose pull
 	docker-compose build --pull
 ifneq (, $(shell docker info | grep "provider=virtualbox"))
@@ -33,8 +44,6 @@ stop:
 	docker-compose rm -f
 ifeq ($(UNAME), Linux)
 	sudo ifconfig $(DEVICE):tugboat 192.168.65.2 down || true
-	sudo ifconfig $(DEVICE):tugboat 192.168.65.1 down || true
 else
 	sudo ifconfig $(DEVICE) -alias 192.168.65.2 || true
-	sudo ifconfig $(DEVICE) -alias 192.168.65.1 || true
 endif
