@@ -1,12 +1,9 @@
-If (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator))
-{
-  $scriptDir = Split-Path $MyInvocation.MyCommand.Path -Parent
+$scriptDir = Split-Path $MyInvocation.MyCommand.Path -Parent
 
-  $arguments = "& '" + $scriptDir + "/windows-networking.ps1'"
-  $p = Start-Process powershell -Verb runAs -ArgumentList $arguments -wait
-  $p.HasExited
-  $p.ExitCode
-}
+$arguments = "& '" + $scriptDir + "/windows-networking.ps1'"
+$p = Start-Process powershell -Verb runAs -ArgumentList $arguments -wait
+$p.HasExited
+$p.ExitCode
 
 Set-Item Env:TUGBOAT_IP "10.156.156.1"
 
