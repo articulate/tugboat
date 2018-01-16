@@ -8,8 +8,7 @@ If (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
   $p.ExitCode
 }
 
-setx TUGBOAT_IP 10.156.156.1
-set TUGBOAT_IP=10.156.156.1
+Set-Item Env:TUGBOAT_IP "10.156.156.1"
 
 docker-compose stop
 docker-compose rm -f
