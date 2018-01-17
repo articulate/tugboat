@@ -35,12 +35,6 @@ Now run `docker-compose up` on your project.
 
 Then simply go to `http://awesome-service.tugboat.zone/` (docker toolbox) or `http://awesome-service.native.tugboat.zone` (docker native) in your browser (because we set the name to be `awesome-service`)
 
-## Docker for Windows
-
-Docker for Windows needs to have its network subnet set to a very specific subnet.  Right-click on the docker icon in your system tray, once in settings, edit the Network settings to look like:
-
-![](/windows-network.png)
-
 ## SSL Support
 
 This project by default provides SSL support using a self-signed SSL cert for `*.tugboat.zone`
