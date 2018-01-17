@@ -1,7 +1,7 @@
 $scriptDir = Split-Path $MyInvocation.MyCommand.Path -Parent
 
 $arguments = "& '" + $scriptDir + "/windows-networking.ps1'"
-$p = Start-Process powershell -Verb runAs -ArgumentList $arguments -wait
+$p = Start-Process powershell -Verb runas -ArgumentList $arguments -Wait
 $p.HasExited
 $p.ExitCode
 
