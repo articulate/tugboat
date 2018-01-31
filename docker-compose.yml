@@ -1,10 +1,10 @@
 version: '2.1'
 services:
   consul:
-    image: gliderlabs/consul-server
+    image: consul
     ports:
       - 8500
-    command: "-bootstrap -bind 0.0.0.0 -client 0.0.0.0 -ui"
+    command: "consul agent -dev -bind 0.0.0.0 -client 0.0.0.0 -ui -log-level warn"
     dns_search: ""
     labels:
       SERVICE_8500_CHECK_TCP: "true"
