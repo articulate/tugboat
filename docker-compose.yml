@@ -36,8 +36,8 @@ services:
       REGISTRY_CONSUL_ADDR: "consul:8500"
       REGISTRY_CONSUL_REGISTER_TAGS: "urlprefix-fabio.*/,urlprefix-dev.*/"
     ports:
-      - "${TUGBOAT_IP:-192.168.65.2}:80:80"
-      - "${TUGBOAT_IP:-192.168.65.2}:443:443"
+      - "${TUGBOAT_IP:-10.156.156.1}:80:80"
+      - "${TUGBOAT_IP:-10.156.156.1}:443:443"
     restart: always
     depends_on:
       - consul
